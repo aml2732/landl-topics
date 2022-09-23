@@ -1,0 +1,55 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div>
+            <h1>MIDI Demo</h1>
+            <div>
+                <div style="width:50%; display:inline-block">
+                    <p>Discovering the basics: </p>
+                    <label for="volume">Volume (0-10)</label>
+                    <input type="range" min="0" max="10" value="5" id="volume" onchange="testVolumeOnChange(event)"><br/><br/>
+                    <a href="https://en.wikipedia.org/wiki/Piano_key_frequencies" target="_blank">Piano Key reference of MIDI keys + frequencies</a> <br/><br/>
+                    <div id="keyboard">
+                        <svg id="keyboard-svg" xmlns="http://www.w3.org/2000/svg" width="400px">
+                            <rect width="50" height="125" style="fill:#ffffff;stroke:#000000;" onmousedown="testKeyPressed('middleC')" onmouseup="testKeyReleased('middleC')" x="0" y="0"></rect>
+                            <rect width="50" height="125" style="fill:#ffffff;stroke:#000000;" onmousedown="testKeyPressed('D')" onmouseup="testKeyReleased('D')" x="50" y="0"></rect>
+                            <rect width="50" height="125" style="fill:#ffffff;stroke:#000000;" onmousedown="testKeyPressed('E')" onmouseup="testKeyReleased('E')" x="100" y="0"></rect>
+                            <rect width="50" height="125" style="fill:#ffffff;stroke:#000000;" onmousedown="testKeyPressed('F')" onmouseup="testKeyReleased('F')" x="150" y="0"></rect>
+                            <rect width="50" height="125" style="fill:#ffffff;stroke:#000000;" onmousedown="testKeyPressed('G')" onmouseup="testKeyReleased('G')" x="200" y="0"></rect>
+                            <rect width="50" height="125" style="fill:#ffffff;stroke:#000000;" onmousedown="testKeyPressed('A')" onmouseup="testKeyReleased('A')" x="250" y="0"></rect>
+                            <rect width="50" height="125" style="fill:#ffffff;stroke:#000000;" onmousedown="testKeyPressed('B')" onmouseup="testKeyReleased('B')" x="300" y="0"></rect>
+                            <rect width="50" height="125" style="fill:#ffffff;stroke:#000000;" onmousedown="testKeyPressed('TenorC')" onmouseup="testKeyReleased('TenorC')" x="350" y="0"></rect>
+                            <rect width="40" height="75" style="fill:#000000;stroke:#000000;" onmousedown="testKeyPressed('middleCSharp')" onmouseup="testKeyReleased('middleCSharp')" x="30" y="0"></rect>
+                            <rect width="40" height="75" style="fill:#000000;stroke:#000000;" onmousedown="testKeyPressed('DSharp')" onmouseup="testKeyReleased('DSharp')" x="80" y="0"></rect>
+                            <rect width="40" height="75" style="fill:#000000;stroke:#000000;" onmousedown="testKeyPressed('FSharp')" onmouseup="testKeyReleased('FSharp')" x="180" y="0"></rect>
+                            <rect width="40" height="75" style="fill:#000000;stroke:#000000;" onmousedown="testKeyPressed('GSharp')" onmouseup="testKeyReleased('GSharp')" x="230" y="0"></rect>
+                            <rect width="40" height="75" style="fill:#000000;stroke:#000000;" onmousedown="testKeyPressed('ASharp')" onmouseup="testKeyReleased('ASharp')" x="280" y="0"></rect>
+                        </svg>
+                    </div>
+                    <button onclick="testSingleToneButtonPressed()">Test Single Tone</button>
+                </div>
+                <div  style="display:inline-block;width:49%;vertical-align: top;">
+                    <h2>History:</h2>
+                    <div id="history"></div>
+                    <button onclick="replayHistory()">Replay History</button>
+                </div>
+
+            </div>
+
+            <br/><br/>
+            <hr/>
+            <br/><br/>
+
+            <p>Placeholder for playing MIDI files</p>
+
+
+
+
+
+        </div>
+
+        <script src="./index.js"></script>
+    </body>
+</html>
