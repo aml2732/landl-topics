@@ -1,10 +1,11 @@
 <html>
     <head>
 
+
     </head>
     <body>
         <div>
-            <h1>MIDI Demo</h1>
+            <h1>Web Audio API Demo</h1>
             <div>
                 <div style="width:50%; display:inline-block">
                     <p>Discovering the basics: </p>
@@ -42,14 +43,31 @@
             <hr/>
             <br/><br/>
 
-            <p>Placeholder for playing MIDI files</p>
+            <h1>Read MIDI files</h1>
+            <p>We're going to see if we can play (using what we've learned above) a MIDI file. This one originates from <a href="https://en.wikipedia.org/wiki/MIDI"> the MIDI wikipedia page: </a></a> Fun facts: The html5 audio tag only supports a few file formats: MP3, Wav, Ogg</p>
+            <p>
+                MIDI file format [command, key, velocity]
+                Convert to frequency. Frequency = 2^(midikey-69)/12 * 440
+                //  o.frequency.setTargetAtTime(Math.pow(2, (m-69)/12)*440, context.currentTime, 0);
 
-
+            </p>
+            <input id="midifile" type="file" />
+            <button onclick="playSample()">Play Sample</button>
 
 
 
         </div>
+        <script src="./index.js" ></script>
+        <script type="module">
+            //Don't judge the bad code. You weren't here to see the suffering that happened before this.
+            import {MidiParser} from "https://colxi.info/midi-parser-js/src/midi-parser.js"
 
-        <script src="./index.js"></script>
+            window.onload = function(){
+                let fileBlob = document.getElementById('midifile');
+                MidiParser.parse(fileBlob, function(obj){
+                    window.humanReadableMidiToPlay = obj;
+                })
+            }
+        </script>
     </body>
 </html>

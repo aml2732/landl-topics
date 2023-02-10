@@ -6,6 +6,7 @@ const testMidiSingleEvent2 = [128, 72, 64]
 //velocity (softest)0-127(loudest)
 //command 128 === velocity 0 signifying no sound
 
+
 let audioContext = new AudioContext();
 let mainGainNode = null;
 
@@ -73,6 +74,7 @@ function playTone(frequency){
     osc.type = "sine" //sine, square, sawtooth, triangle, custom
     osc.frequency.value = frequency //in Hz (440 is a standard middle-A note)
     osc.start();
+
     return osc;
 }
 
@@ -113,3 +115,106 @@ function replayHistory(){
         return;
     }
 }
+
+//--------------------------------------------------
+
+const FORMAT = {
+    SINGLE_MULTI_CHANNEL_TRACK : 0,
+    ONE_OR_MORE_SIMULTANIOUS_TRACK: 1,
+    ONE_OR_MORE_SEQUENTIAL_TRACK: 2
+}
+
+const EVENTTYPE = {
+    NOTE_AFTERTOUCH: 0xA,
+    CONTROLLER: 0xB,
+    PITCH_BEND_EVENT: 0xE,
+    NOTE_OFF: 0x8,
+    NOTE_ON: 0x9,
+    PROGRAM_CHANTE: 0xC,
+    CHANNEL_AFTERTOUCH: 0xD,
+    EOF: -1
+}
+
+let audioContext2 = new AudioContext();
+let mainGainNode2 = audioContext2.createGain(); //Think of 'gain' as Volume
+mainGainNode2.connect(audioContext2.destination); //In order for sound to happen we must be connected to the computer's speaker system or headphones.
+mainGainNode2.gain.value = 2
+let simpleNoteLookup = {};
+
+function init2(){
+    mainGainNode2 = audioContext2.createGain();
+    mainGainNode2.connect(audioContext2.destination);
+    mainGainNode2.gain.value = 2
+}
+
+function callInitIfNotDoneAlready2(){
+    if(!mainGainNode2){
+        init2();
+    }
+}
+
+
+function parseEvent(eventItem){
+    //Only look at channel events for now (Meta + other can wait till later)
+    //notes: https://github.com/colxi/midi-parser-js/blob/310b0769399f53a209880280d8b27236175dfe17/src/main.js
+    if(eventItem.metaType){
+        if(eventItem.metaType == 0x2F){
+            console.log("End of track reached")
+        }
+    }else{//regular event
+        //https://github.com/colxi/midi-parser-js/wiki/MIDI-File-Format-Specifications
+        callInitIfNotDoneAlready2()
+        let frequency, velocity;
+        switch(eventItem.type){
+            case EVENTTYPE.NOTE_ON:
+                console.log("Note on reached...")
+                //note number: eventItem.data[0]
+                frequency = Math.pow(2, (eventItem.data[0]-69)/12)*440
+                velocity = eventItem.data[1]// how long to hold
+                const osc = audioContext2.createOscillator()
+                osc.connect(mainGainNode2);
+                osc.type = "sine" //sine, square, sawtooth, triangle, custom
+                osc.frequency.value = frequency //in Hz (440 is a standard middle-A note)
+                //TODO: apply velocity, (gain?) https://stackoverflow.com/questions/41042486/volume-velocity-to-gain-web-audio
+                osc.start();
+                if(!simpleNoteLookup[frequency]){simpleNoteLookup[frequency] = []}
+                simpleNoteLookup[frequency].push(osc)
+                break;
+            case EVENTTYPE.NOTE_OFF:
+                console.log("Note off reached...")
+                frequency = Math.pow(2, (eventItem.data[0]-69)/12)*440
+                // velocity is ignored because it makes no diff since we're STOPPING a sound
+                if(simpleNoteLookup[frequency]){
+                    simpleNoteLookup[frequency].shift().stop()
+                }
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+function playSample(){
+    console.log("Play sample using: ", window.humanReadableMidiToPlay)
+    let midiToPlay = window.humanReadableMidiToPlay;
+    switch(midiToPlay.formatType){
+        case FORMAT.SINGLE_MULTI_CHANNEL_TRACK:
+            break;
+        case FORMAT.ONE_OR_MORE_SIMULTANIOUS_TRACK:
+            console.log("got to format.one_or_more_simultanious_track")
+            midiToPlay.track.forEach(function(trackItem){
+                trackItem.event.forEach(function(eventItem){
+                    parseEvent(eventItem)
+
+                })
+            })
+
+            break;
+        case FORMAT.ONE_OR_MORE_SEQUENTIAL_TRACK:
+            break;
+        default:
+            break;
+    }
+}
+
+//NOTE TO SELF. I THINK THESE ARE ALL TURNING OFF AND ON TOO FAST, because the LOOP happens ZIP. We need to better time when each note is played.

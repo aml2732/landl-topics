@@ -1,0 +1,15 @@
+{
+  "name": "web-midi-api",
+  "version": "1.0.0",
+  "description": "## Resources:  - [Web Audio Api docs](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) - [Piano frequencies (Hz) and MIDI keys](https://en.wikipedia.org/wiki/Piano_key_frequencies) - [Create the actual sound with OscillatorNode](https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode) - [Simple Synth Mozilla Demo](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Simple_synth)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.1",
+    "midi-parser-js": "^4.0.4"
+  }
+}
