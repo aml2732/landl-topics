@@ -61,3 +61,19 @@ meta events can specify a change in tempo
 tempo is expressed as a 24-bit number that designates microseconds per quarter-note
 
 Looks like audioContext.currentTime can be used to keep tick time. 
+god I can't do math. Takenn from theese docs https://github.com/mido/mido/blob/3cf635ccb8659e5fea96eb304facdb1373372d99/mido/midifiles/units.py
+bpm = 60 * 1e6 / tempo something something somethign
+Which means: 
+bpm = (60*100000)/tempo aka (60*100000)/500000 = 120 bpm
+ticks = usually 3 ticks per beat; unit of measuring fractions of a beat
+timedelta = how many ticks have passed since last note
+timeduration = (aka ticks; ticks per beat) or frames per second;
+
+Examples:
+if:
+- timedelta = 179 
+- tempo = 120bpm
+- timeduration = 240
+timedelta in real time would be = 480 ticks/sec
+- 120beat/1min * 240ticks/1beat  = 28800 ticks/min
+- 28800ticks/min * 1min/60sec = 480 ticks/sec

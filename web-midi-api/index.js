@@ -140,6 +140,11 @@ let mainGainNode2 = audioContext2.createGain(); //Think of 'gain' as Volume
 mainGainNode2.connect(audioContext2.destination); //In order for sound to happen we must be connected to the computer's speaker system or headphones.
 mainGainNode2.gain.value = 2
 let simpleNoteLookup = {};
+let timeDivision = 0; // 48 - 960
+let timeDelta = 0;
+let tempo = 120;
+let beatsPerMinute = 120; //default (tempo)
+let scheduledNotes = [];
 
 function init2(){
     mainGainNode2 = audioContext2.createGain();
@@ -158,6 +163,12 @@ function parseEvent(eventItem){
     //Only look at channel events for now (Meta + other can wait till later)
     //notes: https://github.com/colxi/midi-parser-js/blob/310b0769399f53a209880280d8b27236175dfe17/src/main.js
     if(eventItem.metaType){
+        if(eventItem.metaType == 0x51){
+            console.log("setTempo meta event reached", eventItem.data)//microseconds per quarter-note
+            //500000 microseconds per quarter-note = 0.5 seconds per quarter-note
+            beatsPerMinute = (60*100000)/eventItem.data
+            tempo = beatsPerMinute
+        }
         if(eventItem.metaType == 0x2F){
             console.log("End of track reached")
         }
@@ -168,6 +179,8 @@ function parseEvent(eventItem){
         switch(eventItem.type){
             case EVENTTYPE.NOTE_ON:
                 console.log("Note on reached...")
+                console.log("delta-times", eventItem.deltaTime)
+                //deltaTime = unit = frames per second | ticks per beat
                 //note number: eventItem.data[0]
                 frequency = Math.pow(2, (eventItem.data[0]-69)/12)*440
                 velocity = eventItem.data[1]// how long to hold
@@ -197,6 +210,9 @@ function parseEvent(eventItem){
 function playSample(){
     console.log("Play sample using: ", window.humanReadableMidiToPlay)
     let midiToPlay = window.humanReadableMidiToPlay;
+    console.log("what is audiocontext? ", audioContext2)
+    timeDivision = typeof midiToPlay.timeDivision === 'number' ? midiToPlay.timeDivision : midiToPlay.timeDivision[0]
+    console.log("startFramesPerSecond", startFramesPerSecond)
     switch(midiToPlay.formatType){
         case FORMAT.SINGLE_MULTI_CHANNEL_TRACK:
             break;
