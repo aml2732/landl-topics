@@ -12,15 +12,14 @@ We will also have a websocket setup to push new messages to the client
 
 ## Example backends:
 ### Nodejs
-- done
+- https://github.com/aml2732/landl-topics/tree/main/websockets-intro/servers/node-example
 - makes use of two npm modules [ws](https://www.npmjs.com/package/ws) and websocket
 ### Python
 
 ## Example client/frontends:
 ### Vanilla JS
-- done
+- https://github.com/aml2732/landl-topics/tree/main/websockets-intro/frontends/vanilla-js-example
 - makes use of https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
-### Angular
 ### React
 ...etc.
 
