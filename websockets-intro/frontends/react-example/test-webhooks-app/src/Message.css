@@ -1,0 +1,8 @@
+.message-container{
+    padding: 2rem;
+    margin-bottom: 1rem;
+    background-color: lightblue;
+    border-color: cornflowerblue;
+    border-radius: 5px;
+    width: 250px;
+}

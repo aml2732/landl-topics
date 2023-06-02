@@ -1,0 +1,14 @@
+.field-containers{
+    padding: 1rem;
+}
+
+.field-containers label{
+    vertical-align: top;
+    width: 100px;
+    display: inline-block;
+}
+
+.field-containers textarea{
+    width: 400px;
+    height: 100px;
+}
