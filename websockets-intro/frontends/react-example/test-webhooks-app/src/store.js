@@ -4,10 +4,7 @@ const initialState = {
 }
 
 const reducer = (state, action) => {
-
-  console.log('reducer called');
   if (action.type == 'INCOMINGMESSAGE'){
-      console.log("reached incoming message with payload: ", action.payload)
       let incomingPayload = action.payload;
       if(typeof incomingPayload == 'string'){
           incomingPayload = JSON.parse(action.payload)
