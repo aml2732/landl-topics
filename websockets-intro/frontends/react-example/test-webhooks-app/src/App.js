@@ -17,6 +17,8 @@ function App() {
     const messages = useSelector(selectMessages)
     const dispatch = useDispatch()
     const websocketContextObj = useContext(WebSocketContext)
+
+    console.log("-- messages" , messages)
     //let messages = [{user: "test user", message: "test message"}];
   return (
       <div className="App">
