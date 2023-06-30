@@ -9,10 +9,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {WebSocketContext} from "./WebhookLibrary";
 
+import { useSelector, useDispatch } from 'react-redux'
+import {selectMessages} from './mySelectors'
+
 
 function App() {
+    const messages = useSelector(selectMessages)
+    const dispatch = useDispatch()
     const websocketContextObj = useContext(WebSocketContext)
-    let messages = [{user: "test user", message: "test message"}];
+    //let messages = [{user: "test user", message: "test message"}];
   return (
       <div className="App">
         <Container>

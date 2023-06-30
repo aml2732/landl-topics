@@ -9,3 +9,4 @@ created with [Create React App](https://github.com/facebook/create-react-app).
 # What you were last working on: 
 - you were using this tutorial: https://www.pluralsight.com/guides/using-web-sockets-in-your-reactredux-app in conjunction with this intro to react-context: https://www.freecodecamp.org/news/react-context-for-beginners/ and this site here.
 - You are getting a response back from server here websockets-intro/frontends/react-example/test-webhooks-app/src/WebhookLibrary.js onMessage. You need to set up redux or somethig to persist the values and be able to reuse them throughout the application.
+- You are reading this: https://www.freecodecamp.org/news/redux-for-beginners/

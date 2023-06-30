@@ -1,4 +1,5 @@
 import React, { createContext } from 'react'
+import {useDispatch} from 'react-redux'
 
 const WebSocketContext = createContext(null)
 
@@ -6,6 +7,7 @@ export {WebSocketContext}
 
 
 export default ({children}) => {
+    const dispatch = useDispatch()
     console.log("got here: webhooklibrary.js default export")
     const url = 'ws://localhost:3000/';
     let myWebSocket;
@@ -38,6 +40,7 @@ export default ({children}) => {
     getInstance().onmessage = (event) => {
         console.log("got event data here: ")
         console.log(event.data)
+        dispatch({type:'INCOMINGMESSAGE', payload:event.data})
     }
 
     libraryObject = {
