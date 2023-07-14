@@ -5,9 +5,9 @@ Following these instructions: https://www.geeksforgeeks.org/flask-creating-first
 - `. venv/bin/activate`
 - `pip3 install Flask`
 - `pip3 install websockets`
-- `pip3 install flask-socketio`
-- `pip3 install websocket`
-- `pip3 install websocket-client`
+- ~~`pip3 install flask-socketio`~~
+- ~~`pip3 install websocket`~~
+- ~~`pip3 install websocket-client`~~
 - `pip3 install asyncio`
 
 ## Steps to run / Development

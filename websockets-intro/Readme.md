@@ -7,7 +7,7 @@ A javascript API, that makes use of the underlying WebSocket communications prot
 Broadly speaking, 
 - a client/browser initiates a request to a server with an `Upgrade` HTTP Header. 
 - The server either allows or disallows the connection and replies to the client with its decision.
-- From here a persistant connection exists and messages can be sent using a protocol different from the usual HTTP methods (get/post) you may be used to: 
+- From here a persistent connection exists and messages can be sent using a protocol different from the usual HTTP methods (get/post) you may be used to: 
   - from client to server
   - from server to client
 - In addition to communication between a client and a server, additionally a server can broadcast messages to multiple clients.
@@ -43,6 +43,15 @@ We will also have a websocket setup to push new messages to the client
   - [socket.io-client](https://www.npmjs.com/package/socket.io-client)
   - [react-use-websocket](https://www.npmjs.com/package/react-use-websocket)
 
+## Security: 
+While websockets can be used casually for proof of concept chat app style work; if you're going to use them in a production environment, it is essential that you use some security checks to control access to that websocket.
+1. Firstly connect via wss; NOT ws. The protocol "wss" establishes an encrypted connection; vs "ws" which is an unencrypted connection.
+2. Secondly, in the initial client->server connection request, send either an auth token / auth headers or a cookie for the server to check
+    - For nodejs it is recommeneded to handle this during the Upgrade request and destroy the socket if auth fails
+    - For python here are some auth examples for the library I used earlier: https://websockets.readthedocs.io/en/stable/topics/authentication.html
+3. Thirdly, you must authenticate the Origin header. Websockets are not limited by same origin policy.
+4. Unrelated to websockets, it may be a good idea to use an algo to encrypt auth token
+
 ## Notes: 
 - supported by all modern common browsers
 - use of HTTP `Upgrade` Header is the signifier for browser to use WebSocket protocol instead of HTTP
@@ -53,6 +62,8 @@ We will also have a websocket setup to push new messages to the client
 - https://dev.to/codesphere/getting-started-with-web-sockets-in-nodejs-49n0
 - https://www.npmjs.com/package/ws#user-content-multiple-servers-sharing-a-single-https-server
 - https://www.pluralsight.com/guides/using-web-sockets-in-your-reactredux-app
+- https://websockets.readthedocs.io/en/stable/intro/index.html
+- https://www.alanwsmith.com/posts/setup-a-python-flask-web-server-with-websockets--20eo3p4t928f
 - And a few others.
 
 ### Writing notes: 
