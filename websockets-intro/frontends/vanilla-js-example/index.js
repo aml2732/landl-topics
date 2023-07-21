@@ -3,6 +3,9 @@ var url = 'ws://localhost:3000/'
 var myWebSocket = new WebSocket(url)
 
 document.getElementById("submit-form").addEventListener("click", handleMessageSubmission)
+myWebSocket.addEventListener("open", ()=>{ console.log("websocket connection opened") })
+myWebSocket.addEventListener("close", () => { console.log("websocket connection closed") })
+document.getElementById("disconnect-button").addEventListener("click", ()=>{myWebSocket.close(1000, "client wants to close connection")})
 
 function handleMessageSubmission(){
     var sendingUser = document.getElementById("message-username").value

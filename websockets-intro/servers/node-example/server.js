@@ -1,5 +1,7 @@
 const express = require('express')
 const WebSocket = require("ws");
+const process = require('node:process');
+
 
 const app = express()
 const port = 3000
@@ -11,6 +13,7 @@ app.get('/', (req, res) => {
 const httpServer = app.listen(port, () => {
   console.log(`httpServer listening on port ${port}`)
 })
+
 const wsServer = new WebSocket.Server({noServer: true})
 
 wsServer.on("connection", (ws)=>{
@@ -24,6 +27,8 @@ wsServer.on("connection", (ws)=>{
 
   ws.on("error", (error)=>{console.log("an error occurred: ", error)})
 
+  ws.on("close", ()=>{console.log("connection has closed")})
+
 })
 
 httpServer.on('upgrade', (request, socket, head)=>{
@@ -31,5 +36,11 @@ httpServer.on('upgrade', (request, socket, head)=>{
   wsServer.handleUpgrade(request, socket, head, (ws) => {
     wsServer.emit('connection', ws, request)
   })
-
 } )
+
+process.on('SIGINT', (code) => {
+  wsServer.clients.forEach((client)=>{
+    client.close()
+  })
+  process.exit()
+});
