@@ -1,0 +1,43 @@
+.user-info-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.auth-container{
+    border: solid 1px black;
+    margin: 1rem;
+    padding:1rem;
+}
+
+.auth-container p {
+     text-align: center;
+}
+
+.auth-buttons{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.auth-buttons .auth-button{
+    width:200px;
+    border: solid 1px blue;
+    padding: 1rem;
+    text-align:center;
+}
+
+.sign-up-on{
+    display: none;
+    margin: 1rem;
+    padding: 1rem;
+    border: solid 1px black;
+}
+
+.sign-up-on input{
+    margin-bottom: 1rem;
+}
+
+.sign-up-on.show{
+    display:block;
+}

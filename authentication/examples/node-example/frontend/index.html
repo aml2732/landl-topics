@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <div class="user-info-container">Info:<div id="user-info">Not logged in</div> <button id="signout">Sign out</button></div>
+        <div>
+            <h1>Home page</h1>
+            <div>
+                <div class="auth-container">
+                    <p>How would you like to register?</p>
+                    <div class="auth-buttons">
+                        <div class="auth-button" id="register-google-auth-button">Google OAuth 2.0</div>
+                        <div class="auth-button" id="register-user-pass-button">Username/Password</div>
+                    </div>
+                </div>
+
+                <div class="auth-container">
+                    <p>How would you like to login?</p>
+                    <div class="auth-buttons">
+                        <div class="auth-button" id="login-google-auth-button">Google OAuth 2.0</div>
+                        <div class="auth-button" id="login-user-pass-button">Username/Password</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="user-pass-registration" class="sign-up-on">
+            <div>
+                <h1>User Pass Registration</h1>
+                <label for="user-pass-reg-username">Username:</label>
+                <input id="user-pass-reg-username" />
+                <br/>
+                <label for="user-pass-reg-password">Password:</label>
+                <input id="user-pass-reg-password"/>
+                <br/>
+                <button>Register</button>
+            </div>
+        </div>
+        <div id="user-pass-login" class="sign-up-on">
+            <div>
+                <h1>User Pass Login</h1>
+                <label for="user-pass-login-username">Username:</label>
+                <input id="user-pass-login-username" />
+                <br/>
+                <label for="user-pass-login-password">Password:</label>
+                <input id="user-pass-login-password"/>
+                <br/>
+                <button id="user-pass-login-submit">Login</button>
+            </div>
+        </div>
+        <div id="google-oauth-registration" class="sign-up-on"></div>
+        <div id="google-oauth-login" class="sign-up-on">
+
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>
