@@ -3,6 +3,7 @@ You're in the middle of using the following resources:
 - https://www.passportjs.org/packages/
 - https://www.passportjs.org/packages/passport-google-oauth20/
 - https://www.npmjs.com/package/express-session
+- https://github.com/jwalton/passport-api-docs#passportauthorizestrategyname-options-callback
 
 Startup instructions: 
 - `cd examples/node-example`
