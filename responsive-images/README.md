@@ -1,3 +1,6 @@
+# Getting started: 
+- no server needed, just run open the index.html file with your browser.
+
 # Responsive Images
 - **srcset** defines "sources" - aka possible images the browser can choose to load.  srcsets are a comma separated list of pairs. Each pair consists of a URI and the width in pixels(basically) of that resource (signified as w).
   - So if you have one source, you would code something it like this: `"assets/large.png 2000w"`
